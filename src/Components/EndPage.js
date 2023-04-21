@@ -74,12 +74,12 @@ class EndPage extends React.Component {
     } else if (whichButton === 2 && curText < 3) {
       this.setState({ instructNum: curText + 1 });
     } else if (whichButton === 3 && curText === 3) {
-      setTimeout(
-        function () {
-          this.redirectToEnd();
-        }.bind(this),
-        0
-      );
+      // setTimeout(
+      //   function () {
+      //     this.redirectToEnd();
+      //   }.bind(this),
+      //   0
+      // );
     }
   }
   // handle key keyPressed
@@ -210,16 +210,12 @@ class EndPage extends React.Component {
           You have finished the study!
           <br />
           <br />
-          <br />
-          <center>
-            Press the [SPACEBAR] to submit study completion on Proflic. Click
-            'OK' on the pop-up.
-          </center>
+          Please send us a message on Proflic.
           <br />
           <br />
-          If the page fails to be directed to Prolific, please use the
-          compeletion code '<strong>C1AY00C0</strong>' and send a message to us
-          on Proflic.
+          You may close the page.
+          <br />
+          <br />
         </span>
       </div>
     );
