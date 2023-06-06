@@ -4,7 +4,6 @@ import "../../node_modules/survey-react/survey.css";
 import "./style/surveyStyle.css";
 import withRouter from "./withRouter";
 
-//import { json } from "./consent/consent.js"; //short for debugging
 import { json } from "./consent/consentFull.js";
 
 class StartPage extends React.Component {
@@ -21,19 +20,22 @@ class StartPage extends React.Component {
     var dateString = date + "-" + (month + 1) + "-" + year;
     var timeString = currentDate.toTimeString();
 
-    // ID number - either set or get from url
-    //  var userID = Math.floor(100000 + Math.random() * 900000);
-    //var userID = 120000; //for testing
+    // Random ID number to set conditions for the task order
+    // even numbers will start with the perception task
+    // odd numbers will start with the memory task
+    var userID = Math.floor(100000 + Math.random() * 900000);
+    var condition = 0;
 
-    const userID = this.props.state.userID;
+    const prolificID = this.props.state.prolificID;
 
     // Set state
     this.state = {
       userID: userID,
+      prolificID: prolificID,
+      condition: condition,
       date: dateString,
       dateTime: dateTime,
       startTime: timeString,
-
       consentComplete: 0,
     };
 
@@ -61,16 +63,22 @@ class StartPage extends React.Component {
       consentComplete: 1,
     });
 
-    //On click consent, sent to tutorial page with the props
-    this.props.navigate("/Questionnaires?PROLIFIC_PID=" + this.state.userID, {
+    var condition = this.state.condition; // if only the quest had error
+    var condUrl = "/Questionnaires?PROLIFIC_PID=";
+
+    this.props.navigate(condUrl + this.state.prolificID, {
       state: {
+        prolificID: this.state.prolificID,
         userID: this.state.userID,
+        condition: condition,
         date: this.state.date,
         startTime: this.state.startTime,
+        statePic: this.state.statePic,
+        stateWord: this.state.stateWord,
+        memCorrectPer: 0,
+        perCorrectPer: 0,
       },
     });
-
-    console.log("UserID is: " + this.state.userID);
   }
 
   render() {
